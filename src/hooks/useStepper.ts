@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { IDataTypeProps } from "./Stepper";
+import { IDataTypeProps } from "../Stepper/Stepper";
 
 export const useStepper = (data: IDataTypeProps[]) => {
   const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
-  const [submittedStepsIndex, setSubmittedStepsIndex] = useState<number[]>([0]);
+  const [submittedStepsIndex, setSubmittedStepsIndex] = useState<number[]>([]);
 
   const nextStep = () => {
     if (activeStepIndex !== data.length - 1) {
@@ -20,15 +20,6 @@ export const useStepper = (data: IDataTypeProps[]) => {
     }
   };
 
-  //   const prevStep = () => {
-  //     if (activeStepIndex < data.length - 1 && activeStepIndex !== 0) {
-  //       setActiveStepIndex(activeStepIndex - 1);
-  //     } else if (activeStepIndex === data.length - 1) {
-  //       setActiveStepIndex(activeStepIndex - 1);
-  //     }
-  //     removeLastSubmittedStep();
-  //   };
-
   const addSubmittedSteps = (submittedStep: number) => {
     if (!submittedStepsIndex.includes(submittedStep)) {
       setSubmittedStepsIndex([...submittedStepsIndex, submittedStep]);
@@ -38,19 +29,13 @@ export const useStepper = (data: IDataTypeProps[]) => {
   };
 
   const removeLastSubmittedStep = () => {
-    // if (submittedStepsIndex.length > 0) {
     const newArray = [...submittedStepsIndex];
     newArray.pop();
     setSubmittedStepsIndex(newArray);
-    // } else {
-    //   alert("No more steps to remove.");
-    // }
   };
 
   useEffect(() => {
     addSubmittedSteps(activeStepIndex);
-    console.log("Submitted steps index", submittedStepsIndex);
-    console.log("Active step index", activeStepIndex);
   }, [activeStepIndex]);
 
   return {

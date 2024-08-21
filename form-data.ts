@@ -1,28 +1,22 @@
-import { IDataTypeProps } from "./Stepper";
+import { IDataTypeProps } from "./src/Stepper/Stepper";
 
 export const formData: IDataTypeProps[] = [
   {
-    title: "Form 1",
+    title: "Car Details",
   },
   {
-    title: "Form 2",
+    title: "Personal Information",
   },
   {
-    title: "Form 3",
+    title: "Required Documents",
   },
   {
-    title: "Form 4",
+    title: "Required Documents",
   },
   // {
-  //   title: "Form 5",
+  //   title: "Required Documents",
   // },
   // {
-  //   title: "Form 6",
-  // },
-  // {
-  //   title: "Form 7",
-  // },
-  // {
-  //   title: "Form 8",
+  //   title: "Required Documents",
   // },
 ];
