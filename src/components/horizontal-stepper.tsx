@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { DVW, font, moderateScale } from "../ui-utils";
 import { Ionicons } from "@expo/vector-icons";
 
-type BrokenLineProps = {
+type HorizontalStepperProps = {
   bgColor: string;
   submitted: boolean;
   lastLengthOfData: number;
@@ -14,7 +14,7 @@ type BrokenLineProps = {
   textColor: string;
 };
 
-export const BrokenLine: React.FC<BrokenLineProps> = ({
+export const HorizontalStepper: React.FC<HorizontalStepperProps> = ({
   bgColor,
   submitted,
   lastLengthOfData,

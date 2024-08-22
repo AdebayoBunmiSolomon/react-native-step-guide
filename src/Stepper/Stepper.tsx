@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { View, ScrollView } from "react-native";
 import { verticalScale } from "../ui-utils";
-import { NBrokenLine } from "../components/n-broken-line";
-import { BrokenLine } from "../components/broken-line";
+import { VerticalStepper } from "../components/vertical-stepper";
+import { HorizontalStepper } from "../components/horizontal-stepper";
 
 export interface IDataTypeProps {
   title: string;
@@ -10,7 +10,7 @@ export interface IDataTypeProps {
 [];
 
 export type stepperPropType = {
-  data: IDataTypeProps[];
+  formSteps: IDataTypeProps[];
   activeStep: number;
   submittedSteps: number[];
   inactiveBgColor?: `#${string}`;
@@ -20,7 +20,7 @@ export type stepperPropType = {
 };
 
 export const FormStepper: React.FC<stepperPropType> = ({
-  data,
+  formSteps,
   activeStep,
   submittedSteps,
   inactiveBgColor,
@@ -29,7 +29,7 @@ export const FormStepper: React.FC<stepperPropType> = ({
   stepperType,
 }) => {
   const subSteps = submittedSteps && submittedSteps.map((item) => item);
-  const lastLengthOfData = data && data.length - 1;
+  const lastLengthOfData = formSteps && formSteps.length - 1;
   const scrollViewRef = useRef<ScrollView | any>(null);
   const itemRefs = useRef<(View | null)[]>([]);
 
@@ -91,12 +91,12 @@ export const FormStepper: React.FC<stepperPropType> = ({
             flexWrap: "wrap",
             marginBottom: verticalScale(10),
           }}>
-          {data &&
-            data.map((item, index) => {
+          {formSteps &&
+            formSteps.map((item, index) => {
               const { submitted, bgColor } = getActiveStepColorAndIcon(index);
               return (
                 <View key={index}>
-                  <NBrokenLine
+                  <VerticalStepper
                     bgColor={bgColor}
                     submitted={submitted}
                     lastLengthOfData={lastLengthOfData}
@@ -113,12 +113,12 @@ export const FormStepper: React.FC<stepperPropType> = ({
           horizontal={true}
           showsHorizontalScrollIndicator={false}
           ref={scrollViewRef}>
-          {data &&
-            data.map((item, index) => {
+          {formSteps &&
+            formSteps.map((item, index) => {
               const { submitted, bgColor } = getActiveStepColorAndIcon(index);
               return (
                 <View key={index} ref={(el) => (itemRefs.current[index] = el)}>
-                  <BrokenLine
+                  <HorizontalStepper
                     bgColor={bgColor}
                     submitted={submitted}
                     lastLengthOfData={lastLengthOfData}

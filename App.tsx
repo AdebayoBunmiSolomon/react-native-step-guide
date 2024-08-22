@@ -11,7 +11,7 @@ export default function App() {
     <>
       <View style={styles.container}>
         <FormStepper
-          data={formData}
+          formSteps={formData}
           activeStep={activeStepIndex}
           submittedSteps={submittedStepsIndex}
           submittedBgColor='#28a745'

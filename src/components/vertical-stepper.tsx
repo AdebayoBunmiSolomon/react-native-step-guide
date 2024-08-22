@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { DVH, DVW, font, moderateScale } from "../ui-utils";
 import { Ionicons } from "@expo/vector-icons";
 
-type NBrokenLineProps = {
+type VerticalStepperProps = {
   bgColor: string;
   submitted: boolean;
   lastLengthOfData: number;
@@ -14,7 +14,7 @@ type NBrokenLineProps = {
   textColor: string;
 };
 
-export const NBrokenLine: React.FC<NBrokenLineProps> = ({
+export const VerticalStepper: React.FC<VerticalStepperProps> = ({
   bgColor,
   submitted,
   lastLengthOfData,
