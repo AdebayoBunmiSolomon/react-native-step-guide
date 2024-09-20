@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { IDataTypeProps } from "../Stepper/Stepper";
 
-export const useStepper = (data: IDataTypeProps[]) => {
+export const useStepper = (data: string[]) => {
   const [activeStepIndex, setActiveStepIndex] = useState<number>(0);
   const [submittedStepsIndex, setSubmittedStepsIndex] = useState<number[]>([]);
 

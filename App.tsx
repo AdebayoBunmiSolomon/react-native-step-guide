@@ -16,7 +16,7 @@ export default function App() {
           submittedSteps={submittedStepsIndex}
           submittedBgColor='#28a745'
           activeBgColor='#DC143C'
-          stepperType='horizontal-title'
+          stepperType='scrollable-vertical-title'
         />
         <TouchableOpacity onPress={() => nextStep()} style={styles.button}>
           <Text>Next</Text>

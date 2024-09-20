@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from "react-native";
 import { DVH, DVW, font, moderateScale, verticalScale } from "../ui-utils";
 import { Ionicons } from "@expo/vector-icons";
 
-type VerticalStepperProps = {
+type ScrollableVerticalStepperProps = {
   doNotShowTitle?: boolean;
   bgColor: string;
   submitted: boolean;
@@ -13,7 +13,9 @@ type VerticalStepperProps = {
   textColor: string;
 };
 
-export const VerticalStepper: React.FC<VerticalStepperProps> = ({
+export const ScrollableVerticalStepper: React.FC<
+  ScrollableVerticalStepperProps
+> = ({
   doNotShowTitle,
   bgColor,
   submitted,

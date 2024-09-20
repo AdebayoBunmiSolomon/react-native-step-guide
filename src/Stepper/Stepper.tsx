@@ -3,23 +3,26 @@ import { View, ScrollView } from "react-native";
 import { verticalScale } from "../ui-utils";
 import { VerticalStepper } from "../components/vertical-stepper";
 import { HorizontalStepper } from "../components/horizontal-stepper";
-
-export interface IDataTypeProps {
-  title: string;
-}
-[];
+import { DotOnlyStepper } from "../components/dotonly-stepper";
+import { ScrollableVerticalStepper } from "../components/scrollable-vertical-stepper";
 
 export type stepperPropType = {
-  formSteps: IDataTypeProps[];
+  doNotShowTitle?: boolean;
+  formSteps: string[];
   activeStep: number;
   submittedSteps: number[];
   inactiveBgColor?: `#${string}`;
   activeBgColor?: `#${string}`;
   submittedBgColor?: `#${string}`;
-  stepperType?: "horizontal-title" | "vertical-title";
+  stepperType?:
+    | "horizontal-title"
+    | "vertical-title"
+    | "dot-only"
+    | "scrollable-vertical-title";
 };
 
 export const FormStepper: React.FC<stepperPropType> = ({
+  doNotShowTitle,
   formSteps,
   activeStep,
   submittedSteps,
@@ -73,7 +76,11 @@ export const FormStepper: React.FC<stepperPropType> = ({
   };
 
   useEffect(() => {
-    if (stepperType === "horizontal-title") {
+    if (
+      stepperType === "horizontal-title" ||
+      stepperType === "dot-only" ||
+      stepperType === "scrollable-vertical-title"
+    ) {
       scrollToSubmitted();
     }
   }, [activeStep, stepperType]);
@@ -97,6 +104,7 @@ export const FormStepper: React.FC<stepperPropType> = ({
               return (
                 <View key={index}>
                   <VerticalStepper
+                    doNotShowTitle={doNotShowTitle}
                     bgColor={bgColor}
                     submitted={submitted}
                     lastLengthOfData={lastLengthOfData}
@@ -119,6 +127,52 @@ export const FormStepper: React.FC<stepperPropType> = ({
               return (
                 <View key={index} ref={(el) => (itemRefs.current[index] = el)}>
                   <HorizontalStepper
+                    doNotShowTitle={doNotShowTitle}
+                    bgColor={bgColor}
+                    submitted={submitted}
+                    lastLengthOfData={lastLengthOfData}
+                    item={item}
+                    index={index}
+                    textColor={bgColor}
+                  />
+                </View>
+              );
+            })}
+        </ScrollView>
+      ) : stepperType === "dot-only" ? (
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ref={scrollViewRef}>
+          {formSteps &&
+            formSteps.map((item, index) => {
+              const { submitted, bgColor } = getActiveStepColorAndIcon(index);
+              return (
+                <View key={index} ref={(el) => (itemRefs.current[index] = el)}>
+                  <DotOnlyStepper
+                    bgColor={bgColor}
+                    submitted={submitted}
+                    lastLengthOfData={lastLengthOfData}
+                    item={item}
+                    index={index}
+                    textColor={bgColor}
+                  />
+                </View>
+              );
+            })}
+        </ScrollView>
+      ) : stepperType === "scrollable-vertical-title" ? (
+        <ScrollView
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+          ref={scrollViewRef}>
+          {formSteps &&
+            formSteps.map((item, index) => {
+              const { submitted, bgColor } = getActiveStepColorAndIcon(index);
+              return (
+                <View key={index} ref={(el) => (itemRefs.current[index] = el)}>
+                  <ScrollableVerticalStepper
+                    doNotShowTitle={doNotShowTitle}
                     bgColor={bgColor}
                     submitted={submitted}
                     lastLengthOfData={lastLengthOfData}
